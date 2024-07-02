@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - "./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: reservation
+    ports:
+      - "3307:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+
+volumes:
+  mysql-db:
